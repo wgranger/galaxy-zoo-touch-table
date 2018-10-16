@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GalaxyZooTouchTable"
+             xmlns:views="clr-namespace:GalaxyZooTouchTable.Views"
              xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
              mc:Ignorable="d" 
              Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='0.2'}"
@@ -62,7 +63,9 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid Style="{StaticResource JoinMessageStyle}" RenderTransformOrigin="0.5,0.5">
+        <views:SpaceView/>
+
+        <!--<Grid Style="{StaticResource JoinMessageStyle}" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <ScaleTransform/>
             </Grid.RenderTransform>
@@ -178,7 +181,7 @@
             <Viewbox Grid.Row="6" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Foreground="White" Text="DO MORE AT ADLER.ZOONIVERSE.ORG" FontFamily="/GalaxyZooTouchTable;component/Fonts/#Karla" FontWeight="Bold"/>
             </Viewbox>
-        </Grid>
+        </Grid>-->
     </Grid>
 
 </UserControl>
