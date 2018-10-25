@@ -9,10 +9,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top" Margin="8">
+        <!--<DockPanel DockPanel.Dock="Top" Margin="8">
             <TextBlock Text="{Binding Time, StringFormat={}{0:u}}" Foreground="White" Width="140" HorizontalAlignment="Center" DockPanel.Dock="Right"/>
             <Slider Name="TimeSlider" DockPanel.Dock="Top" Value="{Binding Days}" Minimum="0" Maximum="365"/>
-        </DockPanel>
+        </DockPanel>-->
         <helix:HelixViewport3D x:Name="view1" InfiniteSpin="true">
             <!-- Sun light -->
             <ModelVisual3D>

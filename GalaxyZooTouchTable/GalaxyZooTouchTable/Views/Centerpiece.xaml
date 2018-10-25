@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:GalaxyZooTouchTable"
              xmlns:views="clr-namespace:GalaxyZooTouchTable.Views"
              xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:h="http://helix-toolkit.org/wpf"
              mc:Ignorable="d" 
              Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='0.2'}"
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='0.75'}">
@@ -63,7 +64,11 @@
     </UserControl.Resources>
 
     <Grid>
-        <views:SpaceView/>
+        <!--<views:SpaceView/>-->
+
+        <h:HelixViewport3D x:Name="viewport" Background="Black">
+            <h:DefaultLights/>
+        </h:HelixViewport3D>
 
         <!--<Grid Style="{StaticResource JoinMessageStyle}" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>

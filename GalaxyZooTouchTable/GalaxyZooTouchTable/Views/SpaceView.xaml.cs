@@ -15,8 +15,8 @@ namespace GalaxyZooTouchTable.Views
         {
             InitializeComponent();
 
-            view1.Camera.Position = new Point3D(0, 400, 500);
-            view1.Camera.LookDirection = new Vector3D(0, -400, -500);
+            view1.Camera.Position = new Point3D(0, -400, -500);
+            view1.Camera.LookDirection = new Vector3D(0, 400, 500);
             SolarSystem = view1.Children[2] as SolarSystem3D;
             DataContext = SolarSystem;
 
