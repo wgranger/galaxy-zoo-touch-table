@@ -8,8 +8,8 @@
              xmlns:wpf="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
              xmlns:h="http://helix-toolkit.org/wpf"
              mc:Ignorable="d" 
-             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='0.2'}"
-             Width="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='0.75'}">
+             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='0.5'}"
+             Width="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}, Converter={StaticResource UserConsoleConverter}, ConverterParameter='1.4'}">
 
     <UserControl.Resources>
         <Style x:Key="JoinMessageStyle" TargetType="{x:Type Grid}">
@@ -66,7 +66,7 @@
     <Grid>
         <!--<views:SpaceView/>-->
 
-        <h:HelixViewport3D x:Name="viewport" Background="Black">
+        <h:HelixViewport3D x:Name="viewport" Background="Black" IsPanEnabled="False">
             <h:DefaultLights/>
         </h:HelixViewport3D>
 

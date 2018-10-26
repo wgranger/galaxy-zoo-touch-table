@@ -120,6 +120,7 @@
     <Compile Include="Converters\HidePanelConverter.cs" />
     <Compile Include="Converters\LevelOpacityConverter.cs" />
     <Compile Include="Lib\Messenger.cs" />
+    <Compile Include="Models\AstroCoordinate.cs" />
     <Compile Include="ViewModels\LevelerViewModel.cs" />
     <Compile Include="Views\Centerpiece.xaml.cs">
       <DependentUpon>Centerpiece.xaml</DependentUpon>
