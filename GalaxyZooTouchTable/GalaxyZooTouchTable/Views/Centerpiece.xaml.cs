@@ -1,6 +1,9 @@
 ﻿using GalaxyZooTouchTable.Models;
 using HelixToolkit.Wpf;
+using PanoptesNetClient;
+using PanoptesNetClient.Models;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,26 +21,56 @@ namespace GalaxyZooTouchTable
         public SphereVisual3D Sphere { get; set; }
         private Dictionary<SphereVisual3D, string> Models = new Dictionary<SphereVisual3D, string>();
         private List<Model3D> hitResultsList = new List<Model3D>();
+        public List<Subject> RawSubjects { get; set; } = new List<Subject>();
+        public List<InteractiveSubject> VisibleSubjects { get; set; } = new List<InteractiveSubject>();
 
         public Centerpiece()
         {
             InitializeComponent();
+            FetchSubjects();
 
             viewport.DefaultCamera = new PerspectiveCamera();
             viewport.DefaultCamera.Position = new Point3D(0, 0, 0);
             viewport.CameraMode = CameraMode.FixedPosition;
 
             viewport.Children.Add(new GridLinesVisual3D());
+        }
 
-            var test = new AstroCoordinate(200.00726, 3.084285, 0.1469969);
+        private void PlotItems()
+        {
+            foreach (var subject in VisibleSubjects)
+            {
+                Sphere = new SphereVisual3D();
+                Sphere.Radius = 5;
+                Sphere.Center = new Point3D(subject.X, subject.Y, subject.Z);
+                Sphere.Fill = Brushes.Gray;
+                viewport.Children.Add(Sphere);
+            }
+        }
 
-            Sphere = new SphereVisual3D();
-            Sphere.Radius = 0.25;
-            Sphere.Center = new Point3D(test.X, test.Y, test.Z);
-            Sphere.Fill = Brushes.Gray;
-            viewport.Children.Add(Sphere);
+        private async void FetchSubjects()
+        {
+            ApiClient client = new ApiClient();
+            NameValueCollection query = new NameValueCollection
+            {
+                { "workflow_id", Config.WorkflowId },
+                { "page_size", "10" }
+            };
+            RawSubjects = await client.Subjects.GetList("queued", query);
+            GetCoordinates();
+        }
 
-            Models.Add(Sphere, "FirstSphere");
+        private void GetCoordinates()
+        {
+            if (RawSubjects.Count > 0)
+            {
+                foreach (Subject subject in RawSubjects)
+                {
+                    InteractiveSubject SubjectWithCoordinates = new InteractiveSubject(subject);
+                    VisibleSubjects.Add(SubjectWithCoordinates);
+                }
+            }
+            PlotItems();
         }
 
         private void Grid_TouchDown(object sender, TouchEventArgs e)

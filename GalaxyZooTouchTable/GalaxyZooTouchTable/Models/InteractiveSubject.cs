@@ -1,28 +1,50 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using PanoptesNetClient.Models;
+using System;
 
 namespace GalaxyZooTouchTable.Models
 {
-    public class AstroCoordinate
+    public class InteractiveSubject
     {
+        public Subject Subject { get; set; }
         public double RA { get; set; }
         public double DEC { get; set; }
         public double Redshift { get; set; }
         public Declination Declination { get; set; }
+        public double MPC { get; set; }
 
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
 
-        public AstroCoordinate(double ra, double dec, double redshift)
+        public InteractiveSubject(Subject subject)
         {
             //RA = ra;
             //DEC = dec;
-            RA = 26.017046;
-            DEC = -15.937469;
-            Redshift = 11.9;
+            Subject = subject;
+            //RA = 26.017046;
+            //DEC = -15.937469;
+            //Redshift = 11.9;
 
-            ConvertDeclination(dec);
+            FindMetadata(subject);
+            //ConvertDeclination(dec);
             FindCartesianCoordinates();
+        }
+
+        private void FindMetadata(Subject subject)
+        {
+            RA = subject.Metadata["!ra"];
+            DEC = subject.Metadata["!dec"];
+            Redshift = subject.Metadata["!redshift"];
+            MpcFromRedshift();
+        }
+
+        private void MpcFromRedshift()
+        {
+            var SpeedOfLight = 3 * Math.Pow(10, 5);
+            var HubbleConstant = 65;
+            var Velocity = (Redshift) * SpeedOfLight;
+            MPC = Velocity / HubbleConstant;
         }
 
         public void ConvertDeclination(double dec)
@@ -45,9 +67,9 @@ namespace GalaxyZooTouchTable.Models
 
         public void FindCartesianCoordinates()
         {
-            X = Redshift * Math.Cos(ToDegrees(DEC)) * Math.Cos(ToDegrees(RA));
-            Y = Redshift * Math.Cos(ToDegrees(DEC)) * Math.Sin(ToDegrees(RA));
-            Z = Redshift * Math.Sin(ToDegrees(DEC));
+            X = MPC * Math.Cos(ToDegrees(DEC)) * Math.Cos(ToDegrees(RA));
+            Y = MPC * Math.Cos(ToDegrees(DEC)) * Math.Sin(ToDegrees(RA));
+            Z = MPC * Math.Sin(ToDegrees(DEC));
         }
     }
 
