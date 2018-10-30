@@ -64,7 +64,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid MouseDown="Grid_MouseDown">
+    <Grid TouchDown="Grid_TouchDown">
         <!--<views:SpaceView/>-->
 
         <h:HelixViewport3D x:Name="viewport" Background="Black" IsPanEnabled="False">

@@ -1,13 +1,12 @@
 ﻿using GalaxyZooTouchTable.Models;
 using HelixToolkit.Wpf;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Input;
-using System.Windows.Media.Media3D;
-using System.Windows;
 using System.Collections.Generic;
 using System.Diagnostics;
-using GalaxyZooTouchTable.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace GalaxyZooTouchTable
 {
@@ -17,8 +16,8 @@ namespace GalaxyZooTouchTable
     public partial class Centerpiece : UserControl
     {
         public SphereVisual3D Sphere { get; set; }
-        public string Title { get; set; }
         private Dictionary<SphereVisual3D, string> Models = new Dictionary<SphereVisual3D, string>();
+        private List<Model3D> hitResultsList = new List<Model3D>();
 
         public Centerpiece()
         {
@@ -41,22 +40,22 @@ namespace GalaxyZooTouchTable
             Models.Add(Sphere, "FirstSphere");
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_TouchDown(object sender, TouchEventArgs e)
         {
-            Point mouse_pos = e.GetPosition(viewport);
+            Point mouse_pos = e.GetTouchPoint(sender as IInputElement).Position;
             HitTestResult result = VisualTreeHelper.HitTest(viewport, mouse_pos);
-
             RayMeshGeometry3DHitTestResult mesh_result = result as RayMeshGeometry3DHitTestResult;
 
-            if (mesh_result == null)
+            if (mesh_result != null)
             {
-                Title = "";
-                System.Console.WriteLine("FOUND NOTHING");
-            }
-            else
-            {
-                Title = "HEY";
-                System.Console.WriteLine("FOUND SOMETHING");
+                var TouchedItem = mesh_result.VisualHit;
+                bool AppropriateType = TouchedItem.GetType() == typeof(SphereVisual3D);
+
+                if (AppropriateType)
+                {
+                    var ItemTouched = TouchedItem as SphereVisual3D;
+                    ItemTouched.Fill = Brushes.Green;
+                }
             }
         }
     }
