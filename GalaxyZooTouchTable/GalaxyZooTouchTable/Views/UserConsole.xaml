@@ -7,6 +7,7 @@
              d:DesignHeight="366"
              d:DesignWidth="551"
              x:Name="MainConsole"
+             Loaded="UserConsole_Loaded"
              Height="325"
              Width="547"
              mc:Ignorable="d">
@@ -36,9 +37,24 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="AuraStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid x:Name="ControlPanel">
+        <Rectangle x:Name="Aura" Style="{StaticResource AuraStyle}" Width="547" Height="325">
+            <Rectangle.Fill>
+                <RadialGradientBrush GradientOrigin="0.5,1" RadiusX="0.5" RadiusY="0.8">
+                    <RadialGradientBrush.GradientStops>
+                        <GradientStop Color="{Binding User.ThemeColor}" Offset="0.25"/>
+                        <GradientStop Color="Transparent" Offset="1.0"/>
+                    </RadialGradientBrush.GradientStops>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
         <local:StartButton VerticalAlignment="Bottom"/>
 
         <local:ClassificationPanel Margin="0,0,0,10" Style="{StaticResource ClassificationPanelStyle}">

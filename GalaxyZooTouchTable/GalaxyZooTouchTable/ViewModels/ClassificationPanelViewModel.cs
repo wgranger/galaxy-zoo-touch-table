@@ -29,6 +29,7 @@ namespace GalaxyZooTouchTable.ViewModels
         public ICommand OpenClassifier { get; private set; }
         public ICommand SelectAnswer { get; private set; }
         public ICommand ShowCloseConfirmation { get; private set; }
+        public event Action EmitAuraAnimation = delegate { };
 
         private TableSubject _currentSubject;
         public TableSubject CurrentSubject
@@ -161,6 +162,7 @@ namespace GalaxyZooTouchTable.ViewModels
             ClassificationSummaryViewModel.RandomGalaxyDelegate += OnGetRandomGalaxy;
             ClassificationSummaryViewModel.ChooseAnotherGalaxyDelegate += OnChooseAnotherGalaxy;
             ClassificationSummaryViewModel.DropSubjectDelegate += DropSubject;
+            LevelerViewModel.AnimateLevelUpDelegate += EmitAuraAnimation;
         }
 
         private void OnChooseAnotherGalaxy()
@@ -248,8 +250,8 @@ namespace GalaxyZooTouchTable.ViewModels
         private async void OnSubmitClassification(object sender)
         {
             CurrentClassification.Annotations.Add(CurrentAnnotation);
-            ClassificationCounts counts = await _panoptesService.CreateClassificationAsync(CurrentClassification);
-            ClassificationSummaryViewModel.ProcessNewClassification(CurrentSubject.SubjectLocation, counts, CurrentAnswers, SelectedAnswer);
+            //ClassificationCounts counts = await _panoptesService.CreateClassificationAsync(CurrentClassification);
+            //ClassificationSummaryViewModel.ProcessNewClassification(CurrentSubject.SubjectLocation, counts, CurrentAnswers, SelectedAnswer);
 
             NotifySpaceView(RingNotifierStatus.IsSubmitting);
             LevelerViewModel.OnIncrementCount();
