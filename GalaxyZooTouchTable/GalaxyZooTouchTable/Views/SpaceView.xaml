@@ -22,23 +22,6 @@
             <Setter Property="Background" Value="{StaticResource SuccessColor}"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Border.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetProperty="(Border.Width)"
-                                To="112" Duration="0:0:1" AutoReverse="True" 
-                                RepeatBehavior="Forever" />
-                            <DoubleAnimation
-                                Storyboard.TargetProperty="(Border.Height)"
-                                To="34" Duration="0:0:1" AutoReverse="True" 
-                                RepeatBehavior="Forever" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Style.Triggers>
         </Style>
 
         <Style x:Key="MoveMapText" TargetType="{x:Type TextBlock}">
@@ -117,7 +100,7 @@
             </ItemsControl>
 
             <Border Height="55" Width="135" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Border Style="{StaticResource MoveMapBorder}">
+                <Border x:Name="MoveMapNorth" Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewNorth}"/>
                     </i:Interaction.Behaviors>
@@ -133,7 +116,7 @@
             </Border>
 
             <Border Height="135" Width="55" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Border Style="{StaticResource MoveMapBorder}">
+                <Border x:Name="MoveMapEast" Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewEast}"/>
                     </i:Interaction.Behaviors>
@@ -149,7 +132,7 @@
             </Border>
 
             <Border Width="55" Height="135" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                <Border Style="{StaticResource MoveMapBorder}">
+                <Border x:Name="MoveMapWest" Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewWest}"/>
                     </i:Interaction.Behaviors>
@@ -165,7 +148,7 @@
             </Border>
 
             <Border Width="135" Height="55" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Border Style="{StaticResource MoveMapBorder}">
+                <Border x:Name="MoveMapSouth" Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewSouth}"/>
                     </i:Interaction.Behaviors>

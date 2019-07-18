@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace GalaxyZooTouchTable.Views
 {
@@ -14,12 +15,38 @@ namespace GalaxyZooTouchTable.Views
     public partial class SpaceView : UserControl
     {
         SpaceViewModel ViewModel { get; set; }
+        DispatcherTimer Timer = new DispatcherTimer();
 
         public SpaceView()
         {
             InitializeComponent();
             ViewModel = DataContext as SpaceViewModel;
             ViewModel.AnimateMovement += AnimateCutoutMovement;
+
+            Timer.Tick += new EventHandler(PulseButtons);
+            Timer.Interval = new TimeSpan(0, 0, 10);
+            Timer.Start();
+        }
+
+        private void PulseButtons(object sender, EventArgs e)
+        {
+            DoubleAnimation expandHeight = new DoubleAnimation(24, 32, TimeSpan.FromSeconds(0.75));
+            DoubleAnimation expandWidth = new DoubleAnimation(94, 110, TimeSpan.FromSeconds(0.75));
+            expandHeight.AutoReverse = expandWidth.AutoReverse = true;
+            expandHeight.RepeatBehavior = expandWidth.RepeatBehavior = new RepeatBehavior(2);
+            expandHeight.EasingFunction = expandWidth.EasingFunction = new ExponentialEase() { EasingMode = EasingMode.EaseIn };
+
+            MoveMapNorth.BeginAnimation(HeightProperty, expandHeight);
+            MoveMapNorth.BeginAnimation(WidthProperty, expandWidth);
+
+            MoveMapSouth.BeginAnimation(HeightProperty, expandHeight);
+            MoveMapSouth.BeginAnimation(WidthProperty, expandWidth);
+
+            MoveMapEast.BeginAnimation(HeightProperty, expandHeight);
+            MoveMapEast.BeginAnimation(WidthProperty, expandWidth);
+
+            MoveMapWest.BeginAnimation(HeightProperty, expandHeight);
+            MoveMapWest.BeginAnimation(WidthProperty, expandWidth);
         }
 
         void AnimateCutoutMovement(CardinalDirectionEnum direction)
