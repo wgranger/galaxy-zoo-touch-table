@@ -29,11 +29,11 @@
                         <Storyboard>
                             <DoubleAnimation
                                 Storyboard.TargetProperty="(Border.Width)"
-                                To="110" Duration="0:0:1" AutoReverse="True" 
+                                To="112" Duration="0:0:1" AutoReverse="True" 
                                 RepeatBehavior="Forever" />
                             <DoubleAnimation
                                 Storyboard.TargetProperty="(Border.Height)"
-                                To="32" Duration="0:0:1" AutoReverse="True" 
+                                To="34" Duration="0:0:1" AutoReverse="True" 
                                 RepeatBehavior="Forever" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -116,7 +116,7 @@
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
 
-            <Border Height="55" Width="130" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Border Height="55" Width="135" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Border Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewNorth}"/>
@@ -132,7 +132,7 @@
                 </Border>
             </Border>
 
-            <Border Height="130" Width="55" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Border Height="135" Width="55" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Border Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewEast}"/>
@@ -148,7 +148,7 @@
                 </Border>
             </Border>
 
-            <Border Width="55" Height="130" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Border Width="55" Height="135" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Border Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewWest}"/>
@@ -164,7 +164,7 @@
                 </Border>
             </Border>
 
-            <Border Width="130" Height="55" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Border Width="135" Height="55" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Border Style="{StaticResource MoveMapBorder}">
                     <i:Interaction.Behaviors>
                         <Behaviors:TapBehavior Command="{Binding MoveViewSouth}"/>
